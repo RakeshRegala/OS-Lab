@@ -1,46 +1,52 @@
-PROGRAM :
-#include<stdio.h> struct fileTable
-{
-char name[20];
-int nob, blocks[30];
-}ft[30];
-void main()
-{
-int i, j, n; char s[20];
-printf("Enter no of files :"); scanf("%d",&n); for(i=0;i<n;i++)
-{
-printf("\nEnter file name %d :",i+1); scanf("%s",ft[i].name);
-printf("Enter no of blocks in file %d :",i+1); scanf("%d",&ft[i].nob);
-printf("Enter the blocks of the file :"); for(j=0;j<ft[i].nob;j++)
-scanf("%d",&ft[i].blocks[j]);
+#include <stdio.h>
+#include <string.h>
+
+struct fileTable {
+    char name[20];
+    int nob;
+    int blocks[30];
+} ft[30];
+
+int main() {
+    int i, j, n;
+    char s[20];
+
+    printf("Enter number of files: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("\nEnter file name %d: ", i + 1);
+        scanf("%s", ft[i].name);
+
+        printf("Enter number of blocks in file %d: ", i + 1);
+        scanf("%d", &ft[i].nob);
+
+        printf("Enter the block numbers: ");
+        for (j = 0; j < ft[i].nob; j++) {
+            scanf("%d", &ft[i].blocks[j]);
+        }
+    }
+
+    printf("\nEnter the file name to be searched: ");
+    scanf("%s", s);
+
+    // Search for the file
+    for (i = 0; i < n; i++) {
+        if (strcmp(s, ft[i].name) == 0) {
+            break;
+        }
+    }
+
+    if (i == n) {
+        printf("\nFile Not Found\n");
+    } else {
+        printf("\n%-15s %-12s %-15s\n", "FILE NAME", "NO OF BLOCKS", "BLOCKS OCCUPIED");
+        printf("%-15s %-12d", ft[i].name, ft[i].nob);
+        for (j = 0; j < ft[i].nob; j++) {
+            printf("%d ", ft[i].blocks[j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
 }
-printf("\nEnter the file name to be searched-- "); scanf("%s",s);
-for(i=0;i<n;i++)
-if(strcmp(s, ft[i].name)==0) break;
-if(i==n)
-printf("\nFile Not Found");
-else
-{
-
-
-
-
-}
-
-
-printf("\nFILE NAME NO OF BLOCKS BLOCKS OCCUPIED");
-printf("\n %s\t\t%d\t",ft[i].name,ft[i].nob); for(j=0;j<ft[i].nob;j++)
-printf("%d, ",ft[i].blocks[j]);
-}
-
-INPUT :
-
-Enter no of files : 2 Enter file 1 : A
-Enter no of blocks in file 1 : 4
-Enter the blocks of the file 1 : 12 23 9 4 Enter file 2 : G
-Enter no of blocks in file 2 : 5
-Enter the blocks of the file 2 : 88 77 66 55 44 Enter the file to be searched : G
-
-OUTPUT :
-
-FILE NAME NO OF BLOCKS	BLOCKS OCCUPIED G	5		88, 77, 66, 55, 44
